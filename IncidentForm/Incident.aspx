@@ -19,18 +19,10 @@
     <script>
         $(function ()
         {
-            $("#txtdate").datepicker(
-                {
-                    dateFormat: 'dd/mm/yy', 
-                    changeMonth: true,
-                    changeYear: true
-                }
-            );
             $("#txtincdate").datepicker(
                 {
                     dateFormat: 'dd/mm/yy',
-                    //changeMonth: true,
-                    //changeYear: true
+                    
                 }
             ).datepicker('setDate','0');
 
@@ -78,7 +70,7 @@
             <td class="auto-style2">&nbsp;</td>
             <td class="form_items">DATE OF REPORT:</td>
             <td>
-                <asp:TextBox ID="txtdate" runat="server" Width="210px"></asp:TextBox>
+                <asp:TextBox ID="txtdate" runat="server" Width="210px" TextMode="DateTimeLocal"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ErrorMessage="Required Field" ForeColor="Red" ControlToValidate="txtdate" SetFocusOnError="True">*</asp:RequiredFieldValidator>
             </td>
         </tr>
@@ -92,7 +84,7 @@
             <td class="auto-style2">&nbsp;</td>
             <td class="form_items">INCIDENT NO:</td>
             <td>
-                <asp:TextBox ID="txtincno" runat="server" Width="210px" Enabled="False" EnableViewState="False"></asp:TextBox>
+                <asp:TextBox ID="txtincno" runat="server" Width="210px" EnableViewState="False"></asp:TextBox>
             </td>
         </tr>
     </table>

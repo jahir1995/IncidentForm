@@ -11,14 +11,25 @@ namespace IncidentForm
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
+        SqlConnection con1;
+        SqlCommand cmd1;
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+            if(con1 == null)
+            {
+                con1 = new SqlConnection(@"Data Source=MK\SQLEXPRESS;Initial Catalog=incidentmanagement;Integrated Security=True");
+            }
+            con1.Open();
+            SqlCommand cmd1 = new SqlCommand("SELECT MAX(incidentno) + 1 as Id FROM incidentform", con1);
+            txtincno.Text = cmd1.ExecuteScalar().ToString();
+            con1.Close();
         }
         SqlConnection con = new SqlConnection(@"Data Source=MK\SQLEXPRESS;Initial Catalog=incidentmanagement;Integrated Security=True");
         SqlCommand cmd = new SqlCommand();
         protected void Button1_Click(object sender, EventArgs e)
         {
+            DateTime dt = DateTime.Parse(txtdate.Text);
+            txtdate.Text = dt.ToString("MM/dd/yyyy HH:mm");
             con.Open();
             cmd = new SqlCommand("insert into incidentform values ('" + txtreport.Text + "', '" + txtdate.Text + "', '" + txtrole.Text + "', '" + ddlinctype.SelectedItem.ToString() + "', '" + txtincdate.Text + "', '" + txtlocation.Text + "', '" +ddlstate.SelectedItem.ToString()+ "', '" +ddlcity.SelectedItem.ToString()+ "', '" + txtzipcode.Text + "', '" + txtIncDes.Text + "', '" + txtFlwAct.Text + "')", con);
             cmd.ExecuteNonQuery();
